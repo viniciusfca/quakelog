@@ -34,10 +34,11 @@ jobs:
       with:
         repository: viniciusfca/k8s
         token: ${{ secrets.GITHUB_TOKEN }}
-        path: quakelog
 
     - name: Update k8s deployment file
       run: |
+        cd quakelog
+        ls
         sed -i 's|image:.*|image: viniciusfca/quakelog:${{github.ref_name}}|' quakelog.yaml
 
     - name: Commit and push changes
