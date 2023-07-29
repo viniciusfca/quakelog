@@ -1,4 +1,4 @@
-name: Docker Build and Push
+name: Docker Build, Push and Update k8s
 
 on:
   push:
@@ -27,4 +27,25 @@ jobs:
       with:
         context: .
         push: true
-        tags: viniciusfca/quakelog:${{ env.GITHUB_REF_NAME }}
+        tags: viniciusfca/quakelog:${{github.ref_name}}
+
+    - name: Checkout k8s repo
+      uses: actions/checkout@v2
+      with:
+        repository: viniciusfca/k8s
+        token: ${{ secrets.GITHUB_TOKEN }}
+        path: quakelog
+
+    - name: Update k8s deployment file
+      run: |
+        cd quakelog
+        sed -i 's|image:.*|image: viniciusfca/quakelog: ${{github.ref_name}}|' quakelog.yaml
+
+    - name: Commit and push changes
+      run: |
+        cd quakelog
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+        git add quakelog.yaml
+        git commit -m "Update image version"
+        git push origin main
