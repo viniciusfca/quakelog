@@ -33,7 +33,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: viniciusfca/k8s
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.TOKEN_GITHUB }}
 
     - name: Update k8s deployment file
       run: |
