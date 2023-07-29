@@ -38,8 +38,7 @@ jobs:
 
     - name: Update k8s deployment file
       run: |
-        cd quakelog
-        sed -i 's|image:.*|image: viniciusfca/quakelog: ${{github.ref_name}}|' quakelog.yaml
+        sed -i 's|image:.*|image: viniciusfca/quakelog:${{github.ref_name}}|' quakelog.yaml
 
     - name: Commit and push changes
       run: |
