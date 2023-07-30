@@ -18,8 +18,8 @@ func (h *Handler) GameFindAll(w http.ResponseWriter, r *http.Request) {
 		errors.SendErrorResponse(w, &errors.APIError{StatusCode: err.StatusCode, Message: err.Message})
 		return
 	}
-
 	body, _ := json.Marshal(contract.ConvertGameListToGameOutList(games))
+	w.Header().Set("Content-Type", "application/json")
 	w.Write(body)
 }
 
@@ -34,5 +34,6 @@ func (h *Handler) GameFindById(w http.ResponseWriter, r *http.Request) {
 	}
 
 	body, _ := json.Marshal(contract.ConvertToGameOut(&game))
+	w.Header().Set("Content-Type", "application/json")
 	w.Write(body)
 }

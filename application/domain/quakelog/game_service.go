@@ -71,7 +71,6 @@ func (s *GameService) ParseLog(fileName string) ([]Game, error) {
 
 		if strings.Contains(line, "InitGame:") {
 			if currentGame != nil {
-				// Ordenando as kills antes de adicionar ao slice de games
 				currentGame.OrderKills()
 				games = append(games, *currentGame)
 			}
