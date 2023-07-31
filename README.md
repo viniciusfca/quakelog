@@ -26,6 +26,9 @@ There are two ways to run the project:
 
 In both cases, the application will start on port **3000**.
 
+**Run unit tests**
+At the root of the project, execute the command **go test ./... -cover**
+   
 ## Endpoints
 
 **[GET] - localhost:3000/v1/quake**
